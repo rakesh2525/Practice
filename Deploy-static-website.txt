@@ -1,0 +1,10 @@
+*  sudo apt update
+*  sudo apt install apache2
+*   sudo systemctl start apache2
+Downloading  a static website    (https://www.free-css.com/free-css-templates)
+* wget https://www.free-css.com/free-css-templates/page296/oxer  
+* sudo unzip oxer.zip
+copy every thing to this location /var/www/html/  
+cp index.html /var/www/html/  (for example purpose to copy files)
+cp -r css /var/www/html/  (for copying folders)
+start apache server and enable port 80 in security group 
