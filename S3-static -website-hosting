@@ -1,0 +1,23 @@
+Object Ownership  - enabled          (In permission section)
+Remove block all public access       ( (In permission section)
+Make objects public , for this you select objects , above object there is actions button in that select "make public using ACL"
+Next go to properties click on Static website hosting and type index.html and save it.
+
+If above does not work go to permission section and edit bucket policy and paste below code.
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": [
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::<Bucket-Name>/*"
+            ]
+        }
+    ]
+}
