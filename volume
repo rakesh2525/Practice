@@ -1,0 +1,49 @@
+volume is a storage device like harddrive in windows
+"General puropse SSD volumes (gp3 , gp2)"
+
+Transactional workloads
+Virtual desktops
+Medium-sized, single-instance databases
+Low-latency interactive applications
+Development and test environments
+
+                                          "Provisioned IOPS SSD volumes" (io2 ,io1)
+
+Workloads that require sustained IOPS performance or more than 16,000 IOPS
+I/O-intensive database workloads
+
+                                          "HDD Volumes" (st1 , sc1)  - Big data
+create volume:
+
+volumetype - gp2,gp3,io2,i01,st1,sc1
+Delete on termination- yes
+Iops-3000
+Throughput-125
+size(gib)-8gb
+
+lsblk - This command tells whether volume is available or attached
+df -Th(type humanreadable) - show availables memory
+volume should be in same region as same instance
+
+Mount proceess: (we have to mount ebs to folder)
+- lsblk
+- df -Th
+* we have to mount ebs to folder
+- file -s /dev/xvdf       (xvdf is volume name it can be different)   shows output "data" which means os is not detecting
+- mkfs -t xfs /dev/xvdf     (we are writing filesystem)
+* Now we have to mount volume to folder
+- mkdir ytvolume
+- mount /dev/xvdf ytvolume/
+- df -Th (It is mounted)
+* This is temporary mount if system reboots it will go for this we have to write entry in last line it will be there we have copy it
+- cat /etc/mtab (Entry will be there)
+- vi /etc/fstab  (paste the entry)
+- mount -all
+
+* Now we have to increse volume from 8gb to 9gb
+- lsblk
+- df -Th(os detection for understanding)
+- xfs_growfs -d /dev/xvdf  (dev/xvdf=mount path)
+
+* For root volume  this is command = xfs_growfs -d / (if growfs not found install it)
+  
