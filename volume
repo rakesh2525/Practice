@@ -17,8 +17,8 @@ create volume:
 
 volumetype - gp2,gp3,io2,i01,st1,sc1
 Delete on termination- yes
-Iops-3000
-Throughput-125
+Iops-3000  (  means which can handle 3000 requests per second like read ,write)
+Throughput-125 (amount of data that can be transferred with speed)
 size(gib)-8gb
 
 lsblk - This command tells whether volume is available or attached
