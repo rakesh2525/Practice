@@ -1,0 +1,14 @@
+*  sudo apt update
+*  sudo apt install apache2
+*  sudo systemctl start apache2
+*  cd /var/www/html/  
+*  rm idex.html
+*  sudo nano index.html
+*  <h1>FIRST WEBSITE FOR DEPLOYING</h1>"
+*  sudo systemctl start apache2
+create same server like this with different heading
+*  <h1>SECOND WEBSITE FOR DEPLOYING</h1>"
+
+Now create target group and add 2 ec2 instances in that group.
+Now crate load balancer and attach target group to it.
+Next request will fetch using round robin method first it will go first and next it will go to second server and continues
