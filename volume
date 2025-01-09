@@ -46,4 +46,9 @@ Mount proceess: (we have to mount ebs to folder)
 - xfs_growfs -d /dev/xvdf  (dev/xvdf=mount path)
 
 * For root volume  this is command = xfs_growfs -d / (if growfs not found install it)
+
+
+
+
+
   
