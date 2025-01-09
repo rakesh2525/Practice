@@ -1,7 +1,7 @@
 *  sudo apt update
 *  sudo apt install apache2
 *   sudo systemctl start apache2
-Downloading  a static website    (https://www.free-css.com/free-css-templates)
+Downloading  a static websites    (https://www.free-css.com/free-css-templates)
 * wget https://www.free-css.com/free-css-templates/page296/oxer  
 * sudo unzip oxer.zip
 copy every thing to this location /var/www/html/  
