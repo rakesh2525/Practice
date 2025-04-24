@@ -1,30 +1,32 @@
-name: CI
+name:  Approve AMI for Prod"
+
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
   workflow_dispatch:
-     inputs:
-       start:
-         description: "start_time"
-         required: true
-       end:
-         description: "end_time"
-         required: true
+    inputs:
+      type:
+        description: "Node type"
+        required: true
+        type: choice
+        default: proxy
+        options:
+          - proxy
+          - nidz
+          - prom
+          - enclave
+      version:
+        description: "Version"
+        required: true
+        type: string
 
-jobs:
- 
-  build:
-    runs-on: ubuntu-latest
+permissions:
+   contents: read
 
-
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-     
+# jobs:
+#   bless:
+#     uses: ./.github/workflows/ami_approve_workflow_call.yml
+#     with:
+#       type: ${{ github.event.inputs.type }}
+#       version: ${{ github.event.inputs.version }}
+#       target: prod
+#     secrets:
+#       alerts_webhook_url: ${{ secrets.BAP_ALERTS_WEBHOOK_URL }}
