@@ -25,6 +25,12 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, world!
+        run:  |
+           aws_access_key_id = ${{ secrets.AWS_ACCESS_KEY_ID }}
+           aws_secret_access_key = ${{ secrets.AWS_SECRET_KEY_ID }}
+           region = "us-east-1"
+           export password=$(aws --region us-east-1 secretsmanager get-secret-value --query secretstring --secret-id --output text cicd/splunk_password)
+           echo Hello, world!
+           env
 
      
