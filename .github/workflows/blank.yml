@@ -25,5 +25,5 @@ jobs:
           export REGION="us-east-1"
           export PASSWORD=$(aws --region $REGION secretsmanager get-secret-value --query secretstring --secret-id cicd/splunk_password --output text)
           echo Hello, world!
-          echo "start Time: ${{ github.event.inputs.start }}"
+          echo "start_Time=${{ github.event.inputs.start }}"
           
