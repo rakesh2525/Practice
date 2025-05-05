@@ -1,32 +1,46 @@
-name:  Approve AMI for Prod"
+name: A job to Mute Alerts
+run-name: "Mute Alerts for Splunk"
 
 on:
   workflow_dispatch:
     inputs:
-      type:
-        description: "Node type"
+      start:
+        description: "Start time of mute_alert"
         required: true
-        type: choice
-        default: proxy
-        options:
-          - proxy
-          - nidz
-          - prom
-          - enclave
-      version:
-        description: "Version"
+        type: string
+      end:
+        description: "End time of mute_alert"
+        required: true
+        type: string
+      dc:
+        description: "Name of DC"
         required: true
         type: string
 
 permissions:
-   contents: read
+  actions: read
+  checks: read
 
-# jobs:
-#   bless:
-#     uses: ./.github/workflows/ami_approve_workflow_call.yml
-#     with:
-#       type: ${{ github.event.inputs.type }}
-#       version: ${{ github.event.inputs.version }}
-#       target: prod
-#     secrets:
-#       alerts_webhook_url: ${{ secrets.BAP_ALERTS_WEBHOOK_URL }}
+env:
+  SIGNALFX_API_URL: "https://rakesh-opendnsbu-sse.signalfx.com/v2"
+
+jobs:
+  Mute_Alerts:
+    runs-on: [self-hosted, cloudsec-zproxy-standard]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: GitHub Context Debug
+        run: |
+          echo $JSON | jq
+        env:
+          JSON: ${{ toJSON(github) }}
+
+      - name: Run Mute Alerts Script
+        shell: bash
+        working-directory: ./cloud/Mute_Alerts
+        run: |
+          make run-script start=${{ github.event.inputs.start }} end=${{ github.event.inputs.end }} dc=${{ github.event.inputs.dc }}
+        env:
+          SFX_AUTH_TOKEN: ${{ secrets.SFX_AUTH_TOKEN }}
