@@ -2,7 +2,7 @@ name: A job to Mute Alerts
 run-name: "Mute Alerts for Splunk"
 
 on:
-  workflow_dispatch:
+   workflow_call:
     inputs:
       start:
         description: "Start time of mute_alert"
