@@ -2,13 +2,26 @@ name: Call Reusable Workflow
 
 on:
   workflow_dispatch:
+    inputs:
+      start:
+        description: "Start time of mute_alert"
+        required: true
+        type: string
+      end:
+        description: "End time of mute_alert"
+        required: true
+        type: string
+      dc:
+        description: "Name of DC"
+        required: true
+        type: string
 
 jobs:
   call-reusable-workflow:
     uses: rakesh2525/Practice/.github/workflows/blank.yml@main
     with:
-      start: "2025-05-01T00:00:00Z"
-      end: "2025-05-02T00:00:00Z"
-      dc: "data-center-1"
+      start: ${{ github.event.inputs.start }}
+      end: ${{ github.event.inputs.end }}
+      dc: ${{ github.event.inputs.dc }}
     # secrets:
     #   SFX_AUTH_TOKEN: ${{ secrets.SFX_AUTH_TOKEN }}
