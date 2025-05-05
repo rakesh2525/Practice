@@ -5,7 +5,7 @@ on:
 
 jobs:
   call-reusable-workflow:
-    uses: rakesh2525/Practice/.github/workflows/blank.yml@int
+    uses: rakesh2525/Practice/.github/workflows/blank.yml@main
     with:
       start: "2025-05-01T00:00:00Z"
       end: "2025-05-02T00:00:00Z"
