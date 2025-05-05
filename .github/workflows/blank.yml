@@ -26,7 +26,7 @@ env:
 
 jobs:
   Mute_Alerts:
-    runs-on: [self-hosted, cloudsec-zproxy-standard]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -39,8 +39,10 @@ jobs:
 
       - name: Run Mute Alerts Script
         shell: bash
-        working-directory: ./cloud/Mute_Alerts
+       # working-directory: ./cloud/Mute_Alerts
         run: |
-          make run-script start=${{ github.event.inputs.start }} end=${{ github.event.inputs.end }} dc=${{ github.event.inputs.dc }}
+          # make run-script start=${{ github.event.inputs.start }} end=${{ github.event.inputs.end }} dc=${{ github.event.inputs.dc }}
+          echo Hello, world!
+          echo "start_Time=${{ github.event.inputs.start }}"
         env:
           SFX_AUTH_TOKEN: ${{ secrets.SFX_AUTH_TOKEN }}
