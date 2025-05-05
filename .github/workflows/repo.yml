@@ -10,5 +10,5 @@ jobs:
       start: "2025-05-01T00:00:00Z"
       end: "2025-05-02T00:00:00Z"
       dc: "data-center-1"
-    secrets:
-      SFX_AUTH_TOKEN: ${{ secrets.SFX_AUTH_TOKEN }}
+    # secrets:
+    #   SFX_AUTH_TOKEN: ${{ secrets.SFX_AUTH_TOKEN }}
