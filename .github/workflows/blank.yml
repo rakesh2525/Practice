@@ -39,10 +39,10 @@ jobs:
 
       - name: Run Mute Alerts Script
         shell: bash
-       # working-directory: ./cloud/Mute_Alerts
+        working-directory: ./devop/1.sh
         run: |
           # make run-script start=${{ github.event.inputs.start }} end=${{ github.event.inputs.end }} dc=${{ github.event.inputs.dc }}
-          echo Hello, world!
+          ./1.sh
           echo "start_Time=${{ github.event.inputs.start }}"
         # env:
         #   SFX_AUTH_TOKEN: ${{ secrets.SFX_AUTH_TOKEN }}
