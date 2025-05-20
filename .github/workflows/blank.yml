@@ -25,6 +25,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          repository: rakesh2525/Practice
+          ref: main
 
       # - name: GitHub Context Debug
       #   run: echo "${{ toJSON(github) }}" | jq
