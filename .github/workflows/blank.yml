@@ -1,8 +1,7 @@
-name: A job to Mute Alerts
-run-name: "Mute Alerts for Splunk"
+name: Mute Alerts for Splunk
 
 on:
-   workflow_call:
+  workflow_call:
     inputs:
       start:
         description: "Start time of mute_alert"
@@ -17,44 +16,25 @@ on:
         required: true
         type: string
 
-# permissions:
-#   actions: read
-#   checks: read
-
 env:
   SIGNALFX_API_URL: "https://rakesh-opendnsbu-sse.signalfx.com/v2"
 
 jobs:
-  Mute_Alerts:
+  mute_alerts:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: GitHub Context Debug
-        run: |
-          echo $JSON | jq
-        env:
-          JSON: ${{ toJSON(github) }}
+        run: echo "${{ toJSON(github) }}" | jq
 
       - name: Run Mute Alerts Script
         shell: bash
         working-directory: ./devop/
         run: |
-          # make run-script start=${{ github.event.inputs.start }} end=${{ github.event.inputs.end }} dc=${{ github.event.inputs.dc }}
           chmod +x hi.sh
           ./hi.sh
           echo "start_Time=${{ inputs.start }}"
         # env:
         #   SFX_AUTH_TOKEN: ${{ secrets.SFX_AUTH_TOKEN }}
-
-
-
-
-
-
-
-
-
-
-
