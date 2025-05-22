@@ -1,0 +1,38 @@
+name: GitHub Action to mute Splunk alerts
+description: Runs the mute alerts script with provided parameters.
+inputs:
+  start:
+    description: "Start time of mute_alert (format: YYYY-MM-DD HH:MM)"
+    required: true
+  end:
+    description: "End time of mute_alert (format: YYYY-MM-DD HH:MM)"
+    required: true
+  dc:
+    description: "Name of datacenter"
+    required: true
+  SFX_AUTH_TOKEN:
+    description: "SignalFx authentication token"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: GitHub Context Debug
+      shell: bash
+      run: |
+        echo $JSON | jq
+      env:
+        JSON: ${{ toJSON(github) }}
+        
+    - name: Run Mute Alerts Script
+      shell: bash
+      working-directory: .
+      run: |
+        echo 'make run-script start="${{ inputs.start }}" end="${{ inputs.end }}" dc="${{ inputs.dc }}"'
+        echo "SFX_AUTH_TOKEN is: $SFX_AUTH_TOKEN"
+      env:
+        SFX_AUTH_TOKEN: ${{ inputs.SFX_AUTH_TOKEN }}
+        SIGNALFX_API_URL: "https://cisco-opendnsbu-sse.signalfx.com/v2"
