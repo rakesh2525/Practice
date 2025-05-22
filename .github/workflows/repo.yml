@@ -18,7 +18,7 @@ on:
 
 jobs:
   mute-alerts:
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-latest
     steps:
       - name: Mute Splunk Alerts
         uses: ./cicd
