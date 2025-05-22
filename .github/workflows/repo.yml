@@ -1,27 +1,29 @@
-name: Call Reusable Workflow
+name: "Splunk Mute Alert"
 
 on:
   workflow_dispatch:
     inputs:
       start:
-        description: "Start time of mute_alert"
+        description: "Start time of mute_alert (YYYY-MM-DD HH:MM)"
         required: true
         type: string
       end:
-        description: "End time of mute_alert"
+        description: "End time of mute_alert (YYYY-MM-DD HH:MM)"
         required: true
         type: string
       dc:
-        description: "Name of DC"
+        description: "Name of dc"
         required: true
         type: string
 
 jobs:
-  call-reusable-workflow:
-    uses: rakesh2525/Practice/.github/workflows/blank.yml@main
-    with:
-      start: ${{ github.event.inputs.start }}
-      end: ${{ github.event.inputs.end }}
-      dc: ${{ github.event.inputs.dc }}
-    # secrets:
-    #   SFX_AUTH_TOKEN: ${{ secrets.SFX_AUTH_TOKEN }}
+  mute-alerts:
+    runs-on: ubuntu:latest
+    steps:
+      - name: Mute Splunk Alerts
+        uses: ./cicd
+        with:
+          start: ${{ github.event.inputs.start }}
+          end: ${{ github.event.inputs.end }}
+          dc: ${{ github.event.inputs.dc }}
+          SFX_AUTH_TOKEN: ${{ secrets.SFX_AUTH_TOKEN }}
